@@ -10,10 +10,42 @@
   </head>
   <body>
     <h1>Build with Components</h1>
+
+      <!-- First component -->
       <h2>My first Vue Component</h2>
         <div id="my-first-div">
           <my-first-component></my-first-component>
+          <my-first-component></my-first-component>
         </div>
+
+        <!-- second component -->
+        <h2>Props Component</h2>
+          <div id="component-props-div">
+            <header-component title="Use Component Props"></header-component>
+            <header-component title="Repeat of the header-component template"></header-component>
+          </div>
+
+        <!-- Emit text size -->
+        <h2>Increase Text size on click</h2>
+          <div id="emit-events-div">
+            <div :style="{ fontSize: headerFontSize + 'em'}">
+              <header-component
+                v-for="header in headers"
+                :key="header.id"
+                :title="header.title"
+                @increase-text-size="headerFontSize += 0.5"
+                >
+              </header-component>
+            </div>
+          </div>
+
+          <!-- Working with slot tags -->
+          <h2>Working with slot tags</h2>
+            <div id="slots-div">
+              <slot-component>
+                <p>Extra text from HTML. (Text coded in index.html file)</p>
+              </slot-component>
+            </div>
     <script src="script.js"></script>
   </body>
 </html>
