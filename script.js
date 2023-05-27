@@ -67,4 +67,78 @@ app4.component("slot-component",
 app4.mount("#slots-div")
 
 // 5 Build a dynamic component
-const app5 = Vue.createApp({})
+const app5 = Vue.createApp({
+    data() {
+        return {
+            currentTab: "Homepage",
+            tabs: ["Homepage", "Products", "Contact"]
+        }
+    },
+    computed: {
+        currentTabComponent() {
+            return "tab-" + this.currentTab.toLowerCase()
+        }
+    }
+})
+
+app5.component("tab-homepage", {
+    template: `<div class="navigation">Homepage</div>`
+})
+
+app5.component("tab-products", {
+    template: `<div class="navigation">Our Products</div>`
+})
+
+app5.component("tab-contact", {
+    template: `<div class="navigation">Contact Information</div>`
+})
+
+app5.mount("#navigation-div")
+
+// Dynamic components with binding
+const tabs = [
+    {
+        name: "Homepage",
+        component: {
+            template: `<div>Homepage</div>`
+        }
+    },
+    {
+        name: "Products",
+        component: {
+            template: `<div>Products</div>`
+        }
+    },
+    {
+        name: "Contact",
+        component: {
+            template: `<div>Contact Information</div>`
+        }
+    }
+]
+
+const app6 = Vue.createApp({
+    data() {
+        return {
+            tabs,
+            currentTab: tabs[0]
+        }
+    },
+    computed: {
+        getCurrentTab() {
+            return "tab-" + this.currentTab.toLowerCase()
+        }
+    }
+})
+
+app6.component("tab-homepage", {
+    template: `<div>Homepage</div>`
+})
+app6.component("tab-products", {
+    template: `<div>Our Products</div>`
+})
+app6.component("tab-contact", {
+    template: `<div>Contact Information</div>`
+})
+
+app6.mount("#navigation-div2")
